@@ -20,7 +20,7 @@ app.get("/Turnos", (req, res, next) => {
 app.post("/CrearTurnos", (req, res, next) => {
     const { cliente, servicio } = req.body;
 
-    if (!cliente || typeof cliente !== "string" || cliente.trim === "") {
+    if (!cliente || typeof cliente !== "string" || cliente.trim() === "") {
         res.status(400).json({ error: "El nombre del cliente es obligatorio." });
     }
 
@@ -101,13 +101,9 @@ app.put("/FinalizarTurno/:id", (req, res, next) => {
 });
 
 //Lista de espera
-app.get("/ListaEspera", (req, res, next) => {
+app.get("/ListaEspera", (req, res) => {
 
-    const espera = turnos.file(e => e.estado === "Esperando");
+    const espera = turnos.filter(e => e.estado === "Esperando");
 
-    res.json({
-        totalEnEspera: espera.length,
-        turnos: espera
-    });
-    next();
+    res.json({ totalEnEspera: espera.length, turnos: espera });
 });

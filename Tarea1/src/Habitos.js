@@ -159,7 +159,7 @@ app.get("/EstadisticasHabito/:id", (req, res, next) => {
 });
 
 //EliminarHabito
-app.delete("/EliminarHabito/:id", (req, res, next) => {
+app.delete("/EliminarHabito/:id", (req, res) => {
     const id = parseInt(req.params.id);
 
     if (isNaN(id)) {
@@ -175,5 +175,4 @@ app.delete("/EliminarHabito/:id", (req, res, next) => {
     const eliminado = habitos.splice(indice, 1)[0];
 
     res.json({ message: "Habito eliminado correctamente.", habito: eliminado });
-    next();
 });

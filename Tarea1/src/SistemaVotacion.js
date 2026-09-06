@@ -122,7 +122,7 @@ app.get("/Encuestas/:id/resultados", (req, res, next) => {
 });
 
 //EliminarEncuestas
-app.delete("/EliminarEncuesta/:id", (req, res, next) => {
+app.delete("/EliminarEncuesta/:id", (req, res) => {
     const id = parseInt(req.params.id);
 
     if (isNaN(id)) {
@@ -138,5 +138,4 @@ app.delete("/EliminarEncuesta/:id", (req, res, next) => {
     const [encuestaEliminada] = encuestas.splice(indice, 1);
 
     res.json({ message: 'Encuesta eliminada exitosamente.', encuesta: encuestaEliminada });
-    next();
 })

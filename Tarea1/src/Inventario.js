@@ -101,7 +101,7 @@ app.post("/Inventario/:id/salida", (req, res, next) => {
     res.json({ message: "Salida registrada", producto: item, alertaStockBajo: item.stock < item.stockMinimo });
     next();
 });
-app.get("/Inventario/Alertas", (req, res, next) => {
+app.get("/Inventario/Alertas", (req, res) => {
     const alertas = inventario.filter(item => item.stock < item.stockMinimo).map(item => ({
         id: item.id,
         producto: item.producto,
@@ -111,5 +111,4 @@ app.get("/Inventario/Alertas", (req, res, next) => {
     }));
 
     res.json({ totalAlertas: alertas.length, productosBajoMinimo: alertas });
-    next();
 })
