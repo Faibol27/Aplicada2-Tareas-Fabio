@@ -120,7 +120,7 @@ app.get("/Carrito/total", (req, res, next) => {
 })
 
 //AplicarDescuento
-app.post("/Carrito/aplicarDescuento", (req, res, next) => {
+app.post("/Carrito/aplicarDescuento", (req, res) => {
     const { porcentaje } = req.body;
 
     if (typeof porcentaje !== "number" || porcentaje < 0) {
@@ -135,5 +135,4 @@ app.post("/Carrito/aplicarDescuento", (req, res, next) => {
     const totalConDescuento = totalOriginal - montoDescuento;
 
     res.json({ totalOriginal: Number(totalOriginal.toFixed(2)), porcentaje: `${porcentaje}%`, total: Number(totalConDescuento.toFixed(2)) });
-    next();
 })
