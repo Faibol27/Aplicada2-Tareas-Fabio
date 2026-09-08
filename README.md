@@ -12,4 +12,4 @@ Tarea2/
   ...
 ```
 
-Estudiante: Fabio
+Estudiante: Luis Fabio Cortorreal (2023-0813)
