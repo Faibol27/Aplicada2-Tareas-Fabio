@@ -25,19 +25,11 @@ app.post("/CrearProductos", (req, res, next) => {
         });
     }
     if (typeof precio !== "number" || precio <= 0) {
-        return res
-            .status(400)
-            .json({
-                error: "EL precio debe ser un numero positivo mayor a 0."
-            });
+        return res.status(400).json({ error: "EL precio debe ser un numero positivo mayor a 0." });
     }
     if (
         typeof cantidad !== "number" || cantidad <= 0 || !Number.parseInt(cantidad)) {
-        return res
-            .status(400)
-            .json({
-                error: "La cantidad debe ser un numero positivo mayor a 0."
-            });
+        return res.status(400).json({ error: "La cantidad debe ser un numero positivo mayor a 0." });
     }
 
     const productoExistente = carrito.find(p => p.nombre.trim().toLowerCase() === nombre.trim().toLowerCase());
