@@ -31,3 +31,32 @@ model Opcion {
   encuestaId Int
   encuesta   Encuestas @relation(fields: [encuestaId], references: [id], onDelete: Cascade)
 }
+
+model Inventario {
+  id          Int    @id @default(autoincrement())
+  producto    String
+  stock       Int    @default(0)
+  stockMinimo Int    @default(5)
+}
+
+model Turnos {
+  id       Int    @id @default(autoincrement())
+  cliente  String
+  servicio String
+  estado   String @default("esperando")
+}
+
+model Habito {
+  id          Int        @id @default(autoincrement())
+  nombre      String
+  meta        String
+  registros   Registro[]
+}
+
+model Registro {
+  id          Int      @id @default(autoincrement())
+  fecha       String   // Formato "YYYY-MM-DD"
+  completado  Boolean  @default(true)
+  habitoId    Int
+  habito      Habito   @relation(fields: [habitoId], references: [id], onDelete: Cascade)
+}

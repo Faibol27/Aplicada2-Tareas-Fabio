@@ -1,11 +1,6 @@
 import { Router } from "express";
 import {
-    obtenerCarritos,
-    crearCarritos,
-    actualizarCantidad,
-    eliminarCarrito,
-    totalCarrito,
-    descuentoCarrito
+    obtenerCarritos, crearCarritos, actualizarCantidad, eliminarCarrito, totalCarrito, descuentoCarrito
 } from "../controllers/Carrito.controller.js"
 
 const router = Router();

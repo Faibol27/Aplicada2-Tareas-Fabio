@@ -1,11 +1,6 @@
 import { Router } from "express"
 
-import {
-    obtenerEncuestas,
-    crearEncuesta,
-    votarOpcion,
-    eliminarEncuesta
-} from "../controllers/Votacion.controllers.js"
+import { obtenerEncuestas, crearEncuesta, votarOpcion, eliminarEncuesta } from "../controllers/Votacion.controllers.js"
 const router = Router();
 
 router.get("/", obtenerEncuestas);
