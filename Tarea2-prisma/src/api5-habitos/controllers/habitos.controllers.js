@@ -1,5 +1,22 @@
 import { prisma } from "../db.js";
 
+//Listar
+export const listarHabitos = async (req, res) => {
+  try {
+    const habitos = await prisma.habito.findMany({
+      include: {
+        registros: {
+          orderBy: { fecha: "desc" },
+        },
+      },
+    });
+
+    return res.json(habitos);
+  } catch (error) {
+    return res.status(500).json({ error: "Error interno al listar los hábitos." });
+  }
+};
+
 //Crear
 export const crearHabito = async (req, res) => {
   try {
@@ -26,23 +43,6 @@ export const crearHabito = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({ error: "Error interno del servidor al crear el hábito." });
-  }
-};
-
-//Listar
-export const listarHabitos = async (req, res) => {
-  try {
-    const habitos = await prisma.habito.findMany({
-      include: {
-        registros: {
-          orderBy: { fecha: "desc" },
-        },
-      },
-    });
-
-    return res.json(habitos);
-  } catch (error) {
-    return res.status(500).json({ error: "Error interno al listar los hábitos." });
   }
 };
 
