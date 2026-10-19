@@ -38,16 +38,16 @@ export const login = async (req, res, next) => {
         if (!usuario)
             return res.status(401).json({ Error: "Email o contraseña invalidos" });
 
-        const validarPassword = bcrypt.compare(password, usuario.password);
+        const validarPassword = await bcrypt.compare(password, usuario.password);
         if (!validarPassword)
             return res.status(401).json({ Error: "Email o contraseña invalidos" });
 
         const token = jwt.sign(
             { id: usuario.id, nombre: usuario.nombre, email: usuario.email, rol: usuario.rol },
             process.env.JWT_SECRET,
-            { expiresIn: "24h" }
+            { expiresIn: "1h" }
         )
-
+        res.json({ token })
     } catch (error) {
         next(error);
     }

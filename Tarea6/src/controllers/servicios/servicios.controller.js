@@ -41,7 +41,7 @@ export const crearServicio = async (req, res, next) => {
 //Actualizar Servicio
 export const actualizarServicio = async (req, res, next) => {
     try {
-        const { id } = req.params;
+        const id = Number(req.params.id);
         const { nombre, descripcion, duracion, precio } = req.body;
 
         if (!nombre || typeof nombre !== "string" || nombre.trim() === "")
@@ -77,7 +77,7 @@ export const actualizarServicio = async (req, res, next) => {
 //Eliminar Servicio
 export const eliminarServicio = async (req, res, next) => {
     try {
-        const { id } = req.params;
+        const id = Number(req.params.id);
 
         const buscarServicio = await prisma.servicio.findUnique({ where: { id } });
         if (!buscarServicio)
