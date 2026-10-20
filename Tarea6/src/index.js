@@ -13,6 +13,6 @@ app.use(express.json());
 app.use("/auth", authRoutes)
 app.use("/servicios", serviciosRoutes)
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
     console.log(`Servidor en el puerto ${PORT}`);
 });
