@@ -34,7 +34,7 @@ model Reservas {
   id     Int      @id @default(autoincrement())
   fecha  DateTime @db.Date
   hora   String
-  estado String @default("pendiente")
+  estado String   @default("pendiente")
 
   servicio   Servicio? @relation(fields: [servicioId], references: [id])
   servicioId Int?
