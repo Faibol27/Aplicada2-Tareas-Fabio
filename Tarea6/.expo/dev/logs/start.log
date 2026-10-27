@@ -1,0 +1,8 @@
+{"_e":"root:init","_t":1792534318116,"format":"v0-jsonl","version":"57.0.31"}
+{"_e":"env:mode","_t":1792534318117,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1792534318122,"mode":"development","files":["../..\\..\\.env"],"env":{"API_KEY":"2d97adbcb54b5c8e211c9652e53d84c286e3dbe2d71588c09cdc6f5301661b83","DATABASE_URL":"postgresql://neondb_owner:npg_Zeth40dzbFLq@ep-summer-dew-b5mdncl2-pooler.c-7.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require","JWT_SECRET":"9f0a9060ad6bb8ab0383ffa1002cd37ef24f633c5753793e80e7b8130a3b2a7ea6c312f2d0a0e5062db98ecf702d641347769e977d8858a0f945e79d3fce2be3","PORT":"3000"}}
+{"_e":"devserver:start","_t":1792534318484,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../..\\..\\app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1792534319064,"serverRoot":"../..\\..","projectRoot":"../..\\..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"expo:dev-tools-plugin:load","_t":1792534319764,"plugins":[]}
+{"_e":"metro:instantiate","_t":1792534322534,"atlas":false,"workers":12,"host":"::","port":8081}
+{"_e":"env:mode","_t":1792534322734,"nodeEnv":"development","babelEnv":"development","mode":"development"}
