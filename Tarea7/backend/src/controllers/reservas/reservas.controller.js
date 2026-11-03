@@ -28,22 +28,35 @@ export const crearReserva = async (req, res, next) => {
         const servicioId = Number(req.body.servicioId);
         const { fecha, hora } = req.body;
 
-        if (isNaN(servicioId) || servicioId <= 0)
-            return res.status(400).json({ Error: "id del servicio invalido" });
-        if (!fecha || !hora)
-            return res.status(400).json({ Error: "La fecha y la hora son obligatorias" });
-
-        const servicioExiste = await prisma.servicio.findUnique({ where: { id: servicioId } });
-        if (!servicioExiste)
-            return res.status(404).json({ Error: "El servicio no existe" });
-
-        // No se puede reservar una fecha pasada (comparar solo la fecha, sin hora)
-        const fechaReserva = new Date(`${fecha}T00:00:00`);
+        // 1. La fecha debe ser futura
         const hoy = new Date();
         hoy.setHours(0, 0, 0, 0);
+        const fechaReserva = new Date(fecha);
+        if (isNaN(fechaReserva.getTime()) || fechaReserva <= hoy) {
+            return res.status(400).json({ error: "La fecha debe ser futura." });
+        }
 
-        if (fechaReserva < hoy)
-            return res.status(400).json({ Error: "No se puede reservar una fecha pasada" });
+        // 2. El servicio debe existir
+        const servicio = await prisma.servicio.findUnique({ where: { id: servicioId } });
+        if (!servicio) {
+            return res.status(404).json({ error: "El servicio no existe." });
+        }
+
+        // 3. El usuario no puede tener otra reserva activa para el mismo servicio en la misma fecha
+        // "activa" = estado distinto de 'cancelada' (para fechas futuras esto equivale a 'pendiente')
+        const reservaExistente = await prisma.reservas.findFirst({
+            where: {
+                usuarioId,
+                servicioId,
+                fecha: fechaReserva,
+                NOT: { estado: "cancelada" },
+            },
+        });
+        if (reservaExistente) {
+            return res.status(409).json({
+                error: "Ya tenés una reserva activa para este servicio en la misma fecha.",
+            });
+        }
 
         // Formatear hora para Prisma (@db.Time espera ISO-8601: HH:mm:ss)
         const horaFormateada = hora.includes(":") && hora.split(":").length === 2
@@ -55,7 +68,7 @@ export const crearReserva = async (req, res, next) => {
             data: { fecha: fechaReserva, hora: horaFormateada, estado: "pendiente", usuarioId, servicioId }
         });
 
-        res.status(201).json({ mensaje: "Reserva realizada", nuevaReserva });
+        res.status(201).json(nuevaReserva);
 
     } catch (error) {
         next(error);
